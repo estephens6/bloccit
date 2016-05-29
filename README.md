@@ -4,5 +4,5 @@
 
 Made with my mentor at [Bloc](http://bloc.io).
 
-To load rails server:
+To load rails server: :
 # rails s -p $PORT -b $IP
