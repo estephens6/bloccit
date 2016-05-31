@@ -1,6 +1,6 @@
 require 'random_data'
 
-#Create Posts
+#Create Posts for data base here
 50.times do
 
     Post.create!(
