@@ -1,0 +1,27 @@
+require 'rails_helper'
+
+RSpec.describe Advertisement, type: :model do
+#wrong code
+#  let(:advertisement) { Advertisement.create!(title: "New Advertisement title", body: "New Advertisement body", price: "integer") }
+#  
+#  describe "attributes" do
+#      it "should respond to title" do
+#      expect(advertisement).to respond_to(title: body: price:)
+#  end
+  
+  let(:advertisement) { Advertisement.create! }
+
+  describe "attributes" do
+    it "should respond to title" do
+      expect(advertisement).to respond_to(:title)
+    end
+    
+    it "should respond to copy" do
+      expect(advertisement).to respond_to(:copy)
+    end
+    
+    it "should respond to price" do
+      expect(advertisement).to respond_to(:price)
+    end
+  end
+end
