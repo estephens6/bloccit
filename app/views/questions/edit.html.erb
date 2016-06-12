@@ -11,14 +11,27 @@
         </ul>
     </div>
     <div class="col-md-8">
+            <p style="color:red">       
+                <%= if @question.resolved == true
+                    p "Status: Resolved"
+                else
+                    p "Status: Unresolved"
+                end
+                %> 
+            </p>
         <%= form_for @question do |f| %>
             <div class="form-group">
                 <%= f.label :title %>
                 <%= f.text_field :title, class: "form-control", placeholder: "Enter post title" %>
             </div>
+            
             <div class="form-group">
                 <%= f.label :body %>
                 <%= f.text_area :body, rows: 8, class: "form-control", placeholder: "Enter post body" %>
+            </div>
+            <div class="form-group">
+                <%= f.label :resolved, "Click to Resolve/Unresolve" %>
+                <%= f.check_box :resolved, class: 'form-control' %>
             </div>
             <div class="form-group">
                 <%= f.submit "Save", class: "btn btn-success" %>
