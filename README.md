@@ -9,3 +9,11 @@ To load rails server: :
 
 To remove files that you don't need:
 git clean -f -d
+
+To reset database:
+
+rake db:reset
+
+then migrate database
+
+rake db:migrate
