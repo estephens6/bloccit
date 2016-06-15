@@ -11,7 +11,7 @@ require 'rails_helper'
         
         let(:post) {topic.posts.create!(title: title, body: body) }
         
-        it { is_expectedto belong_to(:topic) }
+        it { is_expected.to belong_to(:topic) }
         
         describe "attributes" do
             it "has title and body attributes" do
