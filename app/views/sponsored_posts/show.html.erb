@@ -6,7 +6,7 @@
         <p class"price"><font color="#FF0000">Only $<%= @sponsored_post.price %>!</font></p>
     </div>
     <div class="col-md-4">
-       <%= link_to "Edit", edit_topic_post_path(@sponsored_post.topic, @sponsored_post), class: "btn btn-success" %>
+       <%= link_to "Edit", edit_topic_sponsored_post_path(@sponsored_post.topic, @sponsored_post), class: "btn btn-success" %>
        <%= link_to "Delete Post", [@sponsored_post.topic, @sponsored_post], method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure you want to delete this sponsored post?" } %>
     </div>
 </div>
