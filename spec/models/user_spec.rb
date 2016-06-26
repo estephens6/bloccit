@@ -6,6 +6,8 @@ let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", passw
    # Shoulda tests for name
    it { is_expected.to validate_presence_of(:name) }
    it { is_expected.to validate_length_of(:name).is_at_least(1) }
+   it { should allow_value("Bloccit User").for(:name) }
+   it { should_not allow_value("bloccit user").for(:name) }
  
    # Shoulda tests for email
    it { is_expected.to validate_presence_of(:email) }
@@ -35,6 +37,5 @@ let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", passw
      it "should be an invalid user due to blank email" do
        expect(user_with_invalid_email).to_not be_valid
      end
+    end
    end
- end
-
