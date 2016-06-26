@@ -17,3 +17,6 @@ rake db:reset
 then migrate database
 
 rake db:migrate
+
+To revert back to last commit
+git reset --hard HEAD
