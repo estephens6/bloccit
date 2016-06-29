@@ -12,7 +12,7 @@ git clean -f -d
 
 To reset database:
 
-rake db:reset
+rake db:reset drops the database and uses the seed file to repopulate it.
 
 then migrate database
 

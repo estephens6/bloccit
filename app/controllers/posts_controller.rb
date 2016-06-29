@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  
+  before_action :require_sign_in, except: :show
 #  def index
 #    @posts = Post.all    
 #  end
@@ -13,12 +15,14 @@ class PostsController < ApplicationController
   end
   
   def create
-    @post = Post.new
-    @post.title = params[:post][:title]
-    @post.body = params[:post][:body]
+#removed due to code smell and refactored using private method / mass-assignment and strong parameters
+#    @post = Post.new
+#    @post.title = params[:post][:title]
+#    @post.body = params[:post][:body]
+#    @post.topic = @topic
     @topic = Topic.find(params[:topic_id])
-    
-    @post.topic = @topic
+    @post = @topic.posts.build(post_params) #post_params pulled from private method at bottom of page
+    @post.user = current_user
     
     if @post.save
       flash[:notice] = "Post was saved sucessfully."
@@ -38,8 +42,10 @@ class PostsController < ApplicationController
   
   def update
     @post = Post.find(params[:id])
-    @post.title = params[:post][:title]
-    @post.body = params[:post][:body]
+#removed due to code smell and refactored using private method / mass-assignment and strong parameters
+#    @post.title = params[:post][:title]
+#    @post.body = params[:post][:body]
+    @post.assign_attributes(post_params) #post_params pulled from private method at bottom of page
     
     if @post.save
       flash[:notice] = "Post was updated successfully."
@@ -63,5 +69,11 @@ class PostsController < ApplicationController
       render :show
     end
   end
-      
+  
+  private
+  
+    def post_params
+      params.require(:post).permit(:title, :body)
+    end
+
 end

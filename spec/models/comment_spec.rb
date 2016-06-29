@@ -2,9 +2,9 @@ require 'rails_helper'
 
     RSpec.describe Comment, type: :model do
         #let (:post) { Post.create!(title: "New Post Title", body: "New Post Body") }
-        let(:topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random.paragraph) }
+        let(:topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
         #let(:post) { topic.post.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph) }
-        let(:post) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
+        let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
         let(:post) { topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user) }
 
 

@@ -9,10 +9,11 @@ require 'rails_helper'
         
         let(:topic) { Topic.create!(name: name, description: description) }
         
-        let(:post) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
         
-        let(:post) { topic.posts.create!(title: title, body: body, user: user) }
+#        let(:post) { topic.post.create!(title: title, body: body, user: user) }
+        let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
         
+        let(:post) { topic.posts.create!(title: title, body: body, user: user) }       
         
         it { is_expected.to belong_to(:topic) }
         it { is_expected.to belong_to(:user) }
