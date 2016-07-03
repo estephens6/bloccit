@@ -25,3 +25,8 @@ You can use heroku pg:reset DATABASE command to reset the entire database. The c
 You have to use heroku rake db:migrate to create the tables then.
 
 Alternatively you can use rake db:reset command locally and then run heroku db:push to update the production db.
+
+#to roll back to last commit
+
+git reset --hard HEAD@{1}
+git push -f

@@ -28,26 +28,19 @@ let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", passw
    it "it responds to role" do
     expect(user).to respond_to (:role)
    end
-     
+   
    it "responds to admin?" do
     expect(user).to respond_to(:admin?)
    end
-     
-   it "responds to member?" do
-    expect(user).to respond_to(:member?)
-   end
-   
-   it "responds to role" do
-    expect(user).to respond_to(:role)
-   end
-   
-   it "responds to admin" do
-    expect(user).to respond_to(:admin?)
-   end
    
    it "responds to member?" do
     expect(user).to respond_to(:member?)
    end
+   
+      it "responds to moderator" do
+    expect(user).to respond_to(:moderator?)
+   end
+   
   end
     
  describe "invalid user" do
@@ -63,29 +56,61 @@ let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", passw
   end
  end
    
- describe "roles" do
-  it "is member by default"do
-   expect(user.role).to eq("member")
-  end
-  
-  context "member user" do
-   it "returns true for #member?" do
-    expect(user.member?).to be_truthy
+  describe "roles" do
+   it "is member by default"do
+    expect(user.role).to eq("member")
    end
    
-   it "returns false for #admin?" do
-    expect(user.admin?).to be_falsey
-   end
- end
- 
- context "admin user" do
-  before do
-   user.admin!
+   context "member user" do
+    it "returns true for #member?" do
+     expect(user.member?).to be_truthy
+    end
+    
+    it "returns false for #moderator" do
+     expect(user.moderator?).to be_falsey
+    end
+    
+    it "returns false for #admin?" do
+     expect(user.admin?).to be_falsey
+    end
   end
   
-  it "returns false for #member?" do
-   expect(user.admin?).to be_truthy
+  context "moderator user" do
+    before do
+     # Set user.role to :moderator
+     user.moderator!
+    end
+    it "returns true for #moderator?" do
+     expect(user.moderator?).to be_truthy
+    end
+    
+    it "returns false for #member" do
+     expect(user.member?).to be_falsey
+    end
+    
+    it "returns false for #admin?" do
+     expect(user.admin?).to be_falsey
+    end
   end
- end
+  
+ 
+  context "admin user" do
+   before do
+    # Set user.role to :admin
+    user.admin!
+   end
+   
+   it "returns false for #member?" do
+    expect(user.member?).to be_falsey
+   end
+   
+   it "returns false for #moderator?" do
+    expect(user.moderator?).to be_falsey
+   end
+   
+   it "returns true for #admin?" do
+    expect(user.admin?).to be_truthy
+   end
+  end
 end
 end

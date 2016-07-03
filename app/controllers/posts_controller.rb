@@ -81,8 +81,20 @@ class PostsController < ApplicationController
       post = Post.find(params[:id])
       
       unless current_user == post.user || current_user.admin?
-        flash[:alert] = "You must be an admin to do that."
-        redirect_to [post.topic, post]
+        if self.action_name == 'destroy'
+          auth_failure('admin', post)
+        else
+          unless current_user.moderator?
+            auth_failure('moderator or an admin', post)
+          end
+        end
       end
     end
+    
+    def auth_failure(role, post)
+      flash[:alert] = "PostController: You must be the creator of this post or #{role == 'admin' ? 'an' : 'a'} #{role} to " \
+                      "#{self.action_name == 'new' ? 'create' : self.action_name} a post. [current_user.name(role) = '#{current_user.name}{#{current_user.role})']"
+      redirect_to [post.topic, post]
+    end
 end
+    

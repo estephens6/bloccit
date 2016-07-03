@@ -73,9 +73,22 @@ class TopicsController < ApplicationController
     end
     
     def authorize_user
+        # admin has zero restrictions/can do anything
         unless current_user.admin?
-            flash[:alert] = "You must be an admin to do that."
-            redirect_to topics_path
+            if(self.action_name == "edit" || self.action_name == "update")
+                unless current_user.moderator?
+                    auth_failure("moderator or an admin")
+                end
+                # members || moderators are not allowed to create or delete topics.
+            else
+                auth_failure('admin')
+            end
         end
+    end
+    
+    def auth_failure(role)
+            flash[:alert] = "TopicsController: You must be #{role == 'admin' ? 'an' : 'a'} #{role} to "\
+                            "#{self.action_name == 'new' ? 'create' : self.action_name} a topic. [current_user.name(role) = '#{current_user.name}(#{current_user.role})']"
+            redirect_to topics_path
     end
 end
