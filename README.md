@@ -18,6 +18,8 @@ then migrate database
 
 rake db:migrate
 
+#skips a pending commit and forces the current commit:
+git push --force
 
 HEROKU database commands:
 You can use heroku pg:reset DATABASE command to reset the entire database. The command will simply drop and create the database.
