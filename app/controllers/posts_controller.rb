@@ -26,6 +26,7 @@ class PostsController < ApplicationController
     @post.user = current_user
     
     if @post.save
+      @post.labels = Label.update_labels(params[:post][:labels])
       flash[:notice] = "Post was saved sucessfully."
 
 #      redirect_to @post
@@ -49,6 +50,7 @@ class PostsController < ApplicationController
     @post.assign_attributes(post_params) #post_params pulled from private method at bottom of page
     
     if @post.save
+      @post.labels = Label.update_labels(params[:post][:labels])
       flash[:notice] = "Post was updated successfully."
 #      redirect_to @post
       redirect_to [@post.topic, @post]
