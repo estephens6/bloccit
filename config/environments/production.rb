@@ -77,4 +77,5 @@ config.assets.compile = true
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  config.action_mailer.default_url_options = { host: 'mighty-anchorage-60540.herokuapp.com' }
 end
