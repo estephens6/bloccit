@@ -7,7 +7,8 @@ module RandomData
     end
     
     def self.random_email
-        "#{random_word}@#{random_word}.#{random_word}"
+        #"#{random_word}@#{random_word}.#{random_word}"
+        "#{random_word}.perkinsdrive@gmail.com"
     end
     
     def self.random_paragraph
