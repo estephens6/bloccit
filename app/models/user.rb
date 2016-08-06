@@ -33,7 +33,4 @@ class User < ActiveRecord::Base
         "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
     end
     
-    def goog
-        'http://www.w3schools.com'
-    end
 end

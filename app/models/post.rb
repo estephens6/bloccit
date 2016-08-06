@@ -4,13 +4,12 @@ class Post < ActiveRecord::Base
     has_many :comments, dependent: :destroy
     has_many :votes, dependent: :destroy
     has_many :favorites, dependent: :destroy
-   
-   has_many :labelings, as: :labelable
-   has_many :labels, through: :labelings
+    has_many :labelings, as: :labelable
+    has_many :labels, through: :labelings
     
     default_scope { order('rank DESC') }
     
-    score :visible_to, -> (user) { user ? all : joins(:topic).where('topics.public' => true) }
+    scope :visible_to, -> (user) { user ? all : joins(:topic).where('topics.public' => true) }
     
     validates :title, length: { minimum: 5 }, presence: true
     validates :body, length: { minimum: 20 }, presence: true
