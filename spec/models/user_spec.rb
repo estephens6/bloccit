@@ -106,6 +106,11 @@ end
    favorite = user.favorites.where(post: @post).create
    expect(user.favorite_for(@post)).to eq(favorite)
   end
+  
+  it "adds the favorite to the user account" do
+   favorite = user.favorites.where(post: @post).create
+   expect(user.favorites.any?).to be_truthy
+  end
  end
  
  describe ".avatar_url" do
