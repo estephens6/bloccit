@@ -30,3 +30,5 @@ Alternatively you can use rake db:reset command locally and then run heroku db:p
 
 git branch -a / shows all local and remote branches
 git granch -r / shows only remote branches.
+
+
